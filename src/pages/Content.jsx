@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Coin from "./Coin";
 import Loader from "react-js-loader";
+import { IoIosSearch } from "react-icons/io";
 
 function Content() {
   const [coins, setCoins] = useState([]);
@@ -36,20 +37,23 @@ function Content() {
   });
 
   return (
-    <div className="coin-app bg-gray-700 h-screen text-white">
+    <div className="coin-app bg-gray-700 h-max-screen text-white">
       <div className="flex justify-center items-center py-10">
-        <h1 className="px-2">Search coin: </h1>
-        <form>
+        <h1 className="px-2 font-semibold uppercase">Search coin: </h1>
+        <form className="flex justify-center items-center mr-5">
           <input
             type="text"
             onChange={handleChange}
-            className=" bg-gray-100 border-2 rounded-md"
+            className=" bg-gray-100 border-2 rounded-md h-10 w-[500px]"
           />
+          <IoIosSearch size={30}/>
         </form>
       </div>
 
       {loading ? (
+        <div className="bg-gray-700 h-max-screen">
         <Loader size={100} />
+        </div>
       ) : (
         filterCoins.map((coin) => {
           return (
@@ -58,6 +62,7 @@ function Content() {
               name={coin.name}
               image={coin.image}
               volume={coin.market_cap}
+              symbol={coin.symbol}
               price={coin.current_price}
               priceChange={coin.price_change_24h}
             />
