@@ -8,7 +8,10 @@ function App() {
 
   return (
     <>
+
      <Content/>
+
+
     </>
   )
 }
