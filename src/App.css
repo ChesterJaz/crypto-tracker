@@ -11,6 +11,7 @@
   box-sizing: border-box;
   scroll-behavior: smooth;
   font-family: 'Poppins', sans-serif;
+  background-color: rgb(71, 71, 71);
 }
 
 a{

@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import Coin from "./Coin";
 import Loader from "react-js-loader";
 import { IoIosSearch } from "react-icons/io";
+import { useDispatch } from "react-redux";
+import { getAllCoins } from "../redux/actions/coinActions";
 
 function Content() {
   const [coins, setCoins] = useState([]);
@@ -10,14 +12,16 @@ function Content() {
 
   const [search, setSearch] = useState("");
 
+  const dispatch = useDispatch()
+
   const getCoins = async () => {
     setLoading(true);
     const response = await axios
       .get(
-        "https://cors-anywhere.herokuapp.com/https://api.coingecko.com/api/v3/coins/markets?vs_currency=php&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en"
+        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=php&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en"
       )
       .then((res) => {
-        setCoins(res.data);
+        dispatch(getAllCoins(res.data));
         console.log(res.data);
         setLoading(false);
       })
@@ -37,21 +41,21 @@ function Content() {
   });
 
   return (
-    <div className="coin-app bg-gray-700 h-max-screen text-white">
+    <div className="coin-app text-white">
       <div className="flex justify-center items-center py-10">
         <h1 className="px-2 font-semibold uppercase">Search coin: </h1>
         <form className="flex justify-center items-center mr-5">
           <input
             type="text"
             onChange={handleChange}
-            className=" bg-gray-100 border-2 rounded-md h-10 w-[500px]"
+            className=" bg-gray-100 border-2 rounded-md h-10 w-[500px] text-black"
           />
           <IoIosSearch size={30}/>
         </form>
       </div>
 
       {loading ? (
-        <div className="bg-gray-700 h-max-screen">
+        <div className="">
         <Loader size={100} />
         </div>
       ) : (
