@@ -1,7 +1,7 @@
 
 
 
-
+//Actions
 
 export const getAllCoins = (coins) =>{
     return {

@@ -3,10 +3,14 @@ import React, { useEffect, useState } from "react";
 import Coin from "./Coin";
 import Loader from "react-js-loader";
 import { IoIosSearch } from "react-icons/io";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getAllCoins } from "../redux/actions/coinActions";
 
 function Content() {
+
+  const allCoins = useSelector((state) => state.coinReducers.coins)
+
+
   const [coins, setCoins] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -22,15 +26,19 @@ function Content() {
       )
       .then((res) => {
         dispatch(getAllCoins(res.data));
+        setCoins(res.data)
         console.log(res.data);
         setLoading(false);
       })
       .catch((error) => console.log(error));
   };
 
+ 
+  
   useEffect(() => {
     getCoins();
-  }, []);
+    
+  }, [dispatch]);
 
   const handleChange = (e) => {
     setSearch(e.target.value);

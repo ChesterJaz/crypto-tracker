@@ -1,4 +1,7 @@
 
+//reducers
+
+
 const initialState = {
     id : "",
     name : "",
@@ -11,9 +14,9 @@ const initialState = {
 
 
 export const coinReducers = (state = initialState, action) =>{
-    switch (action) {
+    switch (action.type) {
         case 'GET_COINS':
-            return {...state, payload}
+            return {...state, ...action.payload}
         default:
             return state;
     }
